@@ -1,0 +1,49 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Secrets and local config
+.env
+.env.*
+*.pem
+*.key
+*.crt
+credentials
+config.local.*
+
+# Runtime output / local query caches
+tmp/
+temp/
+logs/
+*.log
+*_memos/
+aws_memos/
+aliyun_memos/
+tencent_memos/
+hot_reports/
+reports/
+output/
+outputs/
+dist/
+build/
+
+# Generated archives
+*.zip
+*.tar
+*.tar.gz
