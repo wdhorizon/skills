@@ -11,19 +11,19 @@
 
 ## Skills
 
-| Skill | 用途 | 备注 |
-| --- | --- | --- |
-| `aliyun-ask` | 通过自然语言只读查询阿里云资源 | 依赖 `aliyun` CLI、`jq` |
-| `aws-ask` | 通过自然语言只读查询 AWS 云资源 | 依赖 `aws` CLI、`jq` |
-| `tencent-ask` | 通过自然语言只读查询腾讯云资源 | 依赖 `tccli`、`coscli`、`jq` |
-| `aihot` | 查询 AI HOT 中文 AI 资讯、日报和精选动态 | 依赖 `curl`、`jq` |
-| `hot-monitor` | 热点监控、趋势搜索和报告生成 | 可选 Python 依赖见 skill 内说明 |
-| `generate-wechat-theme` | 生成微信公众号排版 CSS 主题 | 输出 CSS |
-| `khazix-writer` | 按「数字生命卡兹克」风格写公众号长文 | 个人写作风格 skill |
-| `neat-freak` | 会话结束时同步项目文档、规则和记忆 | 知识库清理 skill |
-| `wechat-publisher` | 发布 Markdown 到微信公众号草稿箱 | 依赖 wenyan 相关工具 |
-| `skill-vetter` | 安装第三方 skill 前做安全审查 | 安全辅助 skill |
-| `self-improving` | 自我反思、纠错和长期记忆工作流 | 个人工作流 skill |
+| Skill | 用途 | 备注 | 公众号文章 |
+| --- | --- | --- | --- |
+| `aliyun-ask` | 通过自然语言只读查询阿里云资源 | 依赖 `aliyun` CLI、`jq` | [公众号文章](https://mp.weixin.qq.com/s/EpWssPZfuJCwYkjjMVSrVQ?scene=1) |
+| `aws-ask` | 通过自然语言只读查询 AWS 云资源 | 依赖 `aws` CLI、`jq` | [公众号文章](https://mp.weixin.qq.com/s/EpWssPZfuJCwYkjjMVSrVQ?scene=1) |
+| `tencent-ask` | 通过自然语言只读查询腾讯云资源 | 依赖 `tccli`、`coscli`、`jq` | [公众号文章](https://mp.weixin.qq.com/s/EpWssPZfuJCwYkjjMVSrVQ?scene=1) |
+| `aihot` | 查询 AI HOT 中文 AI 资讯、日报和精选动态 | 依赖 `curl`、`jq` | - |
+| `hot-monitor` | 热点监控、趋势搜索和报告生成 | 可选 Python 依赖见 skill 内说明 | - |
+| `generate-wechat-theme` | 生成微信公众号排版 CSS 主题 | 输出 CSS | - |
+| `khazix-writer` | 按「数字生命卡兹克」风格写公众号长文 | 个人写作风格 skill | - |
+| `neat-freak` | 会话结束时同步项目文档、规则和记忆 | 知识库清理 skill | - |
+| `wechat-publisher` | 发布 Markdown 到微信公众号草稿箱 | 依赖 wenyan 相关工具 | - |
+| `skill-vetter` | 安装第三方 skill 前做安全审查 | 安全辅助 skill | - |
+| `self-improving` | 自我反思、纠错和长期记忆工作流 | 个人工作流 skill | - |
 
 ## Repository Layout
 
@@ -52,26 +52,79 @@
 在 Claude Code、Codex、OpenClaw、OpenCode 等支持 Skill 的 Agent 里，可以直接说：
 
 ```text
-帮我安装这个 skill：https://github.com/<your-github>/<repo>/tree/main/<skill-name>
+帮我安装这个 skill：https://github.com/wdhorizon/skills/tree/main/<skill-name>
 ```
 
 把 `<skill-name>` 换成你想安装的目录名，例如：
 
 ```text
-帮我安装这个 skill：https://github.com/<your-github>/<repo>/tree/main/aliyun-ask
-帮我安装这个 skill：https://github.com/<your-github>/<repo>/tree/main/neat-freak
-帮我安装这个 skill：https://github.com/<your-github>/<repo>/tree/main/aihot
+帮我安装这个 skill：https://github.com/wdhorizon/skills/tree/main/aliyun-ask
+帮我安装这个 skill：https://github.com/wdhorizon/skills/tree/main/neat-freak
+帮我安装这个 skill：https://github.com/wdhorizon/skills/tree/main/aihot
 ```
 
-等仓库发布到 GitHub 后，把 `<your-github>/<repo>` 替换成真实地址即可。
+仓库地址：
 
-### 方式二：本地软链接安装（推荐开发时使用）
+- HTTPS：`https://github.com/wdhorizon/skills.git`
+- SSH：`git@github.com-wdhorizon:wdhorizon/skills.git`
+
+### 方式二：使用 `npx skills` 安装
+
+如果本机有 Node.js，也可以使用 Vercel Labs 的 `skills` CLI 安装和管理 skill。这个方式适合同时支持 Codex、Claude Code、Cursor、OpenCode 等多个 Agent 的场景。
+
+查看仓库中有哪些 skill：
+
+```bash
+npx skills add https://github.com/wdhorizon/skills --list
+```
+
+安装指定 skill 到 Codex 全局目录：
+
+```bash
+npx skills add https://github.com/wdhorizon/skills \
+  --skill aliyun-ask \
+  -g \
+  -a codex
+```
+
+安装本地仓库中的指定 skill：
+
+```bash
+npx skills add . \
+  --skill aliyun-ask \
+  -g \
+  -a codex
+```
+
+一次安装本仓库全部 skill 到 Codex：
+
+```bash
+npx skills add . \
+  --skill '*' \
+  -g \
+  -a codex
+```
+
+常用参数：
+
+| 参数 | 说明 |
+| --- | --- |
+| `-g`, `--global` | 安装到用户全局 skills 目录 |
+| `-a`, `--agent <agent>` | 指定目标 Agent，例如 `codex`、`claude-code`、`cursor` |
+| `-s`, `--skill <skill>` | 指定安装某个 skill |
+| `--list` | 只列出可安装 skill，不执行安装 |
+| `--copy` | 复制文件，而不是软链接 |
+| `-y`, `--yes` | 跳过确认，适合脚本化安装 |
+
+不加 `-g` 时通常安装到当前项目的 Agent skills 目录；加 `-g` 时安装到用户全局目录。以 Codex 为例，项目级通常是 `.agents/skills/`，全局级通常是 `~/.codex/skills/`。
+
+### 方式三：本地软链接安装（推荐开发时使用）
 
 软链接适合自己维护这个仓库时使用。以后在本仓库更新 skill，Agent 侧会直接读到最新版本。
 
 ```bash
-git clone https://github.com/<your-github>/<repo>.git
-cd <repo>
+git clone https://github.com/wdhorizon/skills.git
+cd skills
 
 mkdir -p ~/.codex/skills
 ln -s "$(pwd)/aliyun-ask" ~/.codex/skills/aliyun-ask
@@ -86,7 +139,7 @@ for skill in aliyun-ask aws-ask tencent-ask aihot neat-freak khazix-writer; do
 done
 ```
 
-### 方式三：复制安装
+### 方式四：复制安装
 
 复制适合只想固定使用某个版本，不希望本仓库后续改动立刻影响 Agent 的情况。
 
