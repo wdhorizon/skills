@@ -1,7 +1,7 @@
 interface:
   display_name: "AndyWah Writer"
-  short_description: "撰写华仔风格的工程师公众号长文"
-  default_prompt: "Use $andywah-writer to draft a clear WeChat technical article from my notes."
+  short_description: "撰写华仔风格的 AI 与工程长文"
+  default_prompt: "Use $andywah-writer to draft a clear WeChat article about AI engineering or engineering practice from my notes."
 
 policy:
   allow_implicit_invocation: true
